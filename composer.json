@@ -1,87 +1,135 @@
 {
-    "name": "drupal-composer/drupal-project",
-    "description": "Project template for Drupal 9 projects with Composer",
+    "name": "dropfort/drupal_template",
+    "description": "A Drupal project with the base configuration to build with Dropfort.",
     "type": "project",
+    "keywords": [
+        "Drupal",
+        "Dropfort"
+    ],
     "license": "GPL-2.0-or-later",
+    "version": "9.0.0",
+    "homepage": "https://git.dropfort.com/dropfort/drupal-templates/dropfort_drupal_template",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "authors": [
         {
-            "name": "",
-            "role": ""
+            "name": "Coldfront Labs Inc.",
+            "role": "Developer"
         }
     ],
-    "repositories": [
-        {
+    "repositories": {
+        "composer": {
             "type": "composer",
             "url": "https://packages.drupal.org/8"
+        },
+        "asset-packagist": {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
         }
-    ],
+    },
     "require": {
-        "php": ">=7.4",
+        "php": "^7.4",
+        "composer/composer": "^2.0",
         "composer/installers": "^1.9",
         "cweagans/composer-patches": "^1.7",
-        "drupal/core-composer-scaffold": "^9.4",
-        "drupal/core-recommended": "^9.4",
-        "drush/drush": "^11.0",
-        "vlucas/phpdotenv": "^5.1",
-        "webflo/drupal-finder": "^1.2"
+        "drupal/config_split": "^1.7",
+        "drupal/core-composer-scaffold": "^9",
+        "drupal/core-recommended": "^9",
+        "drupal/raven": "^2.3",
+        "drush/drush": "^10.3",
+        "drupal/entity": "^1.2",
+        "oomphinc/composer-installers-extender": "^2.0",
+        "vlucas/phpdotenv": "^2.4",
+        "webflo/drupal-finder": "^1.0",
+        "webmozart/path-util": "^2.3"
     },
     "require-dev": {
-        "drupal/core-dev": "^9.4"
+        "dropfort/dropfort_build": "^4@RC"
     },
     "conflict": {
         "drupal/drupal": "*"
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "config": {
-        "discard-changes": true,
+        "bin-dir": "bin/",
         "sort-packages": true,
-        "allow-plugins": {
-            "composer/installers": true,
-            "cweagans/composer-patches": true,
-            "drupal/core-composer-scaffold": true,
-            "dealerdirect/phpcodesniffer-composer-installer": true
-        }
+        "github-protocols": [
+            "https"
+        ],
+        "optimize-autoloader": true
     },
     "autoload": {
         "classmap": [
             "scripts/composer/ScriptHandler.php"
         ],
-        "files": ["load.environment.php"]
+        "files": [
+            "load.environment.php"
+        ]
     },
     "scripts": {
-        "pre-install-cmd": [
-            "DrupalProject\\composer\\ScriptHandler::checkComposerVersion"
+        "test:acceptance": [
+            "bin/codecept run acceptance -c testing/codeception/codeception.yml --steps --tap --xml --html --env $DF_ENV_TYPE $DF_VALIDATE_ARGS"
         ],
-        "pre-update-cmd": [
-            "DrupalProject\\composer\\ScriptHandler::checkComposerVersion"
+        "test:phpcompatibility": [
+            "bin/phpcs  --ignore=$PHPCS_IGNORE --extensions=$PHPCS_EXTENSIONS --standard=PHPCompatibility -p --runtime-set testVersion 7.3- ./"
         ],
-        "post-install-cmd": [
-            "DrupalProject\\composer\\ScriptHandler::createRequiredFiles"
-        ],
-        "post-update-cmd": [
-            "DrupalProject\\composer\\ScriptHandler::createRequiredFiles"
+        "test:drupal-deprecations": [
+            "bin/drupal-check -d web/modules/custom",
+            "bin/drupal-check -d web/themes/custom"
         ]
     },
     "extra": {
         "drupal-scaffold": {
+            "gitignore": false,
+            "allowed-packages": [
+                "dropfort/dropfort_build"
+            ],
+            "file-mapping": {
+                "[project-root]/.gitattributes": false
+            },
+            "initial": {
+                ".editorconfig": "../.editorconfig",
+                ".gitattributes": "../.gitattributes"
+            },
             "locations": {
                 "web-root": "web/"
             }
         },
+        "installer-types": [
+            "bower-asset",
+            "npm-asset"
+        ],
         "installer-paths": {
-            "web/core": ["type:drupal-core"],
-            "web/libraries/{$name}": ["type:drupal-library"],
-            "web/modules/contrib/{$name}": ["type:drupal-module"],
-            "web/profiles/contrib/{$name}": ["type:drupal-profile"],
-            "web/themes/contrib/{$name}": ["type:drupal-theme"],
-            "drush/Commands/contrib/{$name}": ["type:drupal-drush"]
+            "web/core": [
+                "type:drupal-core"
+            ],
+            "web/libraries/{$name}": [
+                "type:drupal-library",
+                "type:npm-asset",
+                "type:bower-asset"
+            ],
+            "web/modules/contrib/{$name}": [
+                "type:drupal-module"
+            ],
+            "web/modules/custom/{$name}": [
+                "type:drupal-custom-module"
+            ],
+            "web/themes/contrib/{$name}": [
+                "type:drupal-theme"
+            ],
+            "web/themes/custom/{$name}": [
+                "type:drupal-custom-theme"
+            ],
+            "web/profiles/contrib/{$name}": [
+                "type:drupal-profile"
+            ],
+            "web/profiles/custom/{$name}": [
+                "type:drupal-custom-profile"
+            ],
+            "drush/Commands/{$name}": [
+                "type:drupal-drush"
+            ]
         },
-        "composer-exit-on-patch-failure": true,
-        "patchLevel": {
-            "drupal/core": "-p2"
-        },
-        "patches": {
-        }
+        "enable-patching": true,
+        "patches": {}
     }
 }
