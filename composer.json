@@ -69,7 +69,7 @@
             "bin/codecept run acceptance -c testing/codeception/codeception.yml --steps --tap --xml --html --env $DF_ENV_TYPE $DF_VALIDATE_ARGS"
         ],
         "test:phpcompatibility": [
-            "bin/phpcs  --ignore=$PHPCS_IGNORE --extensions=$PHPCS_EXTENSIONS --standard=PHPCompatibility -p --runtime-set testVersion 8.1.- ./"
+            "bin/phpcs  --ignore=$PHPCS_IGNORE --extensions=$PHPCS_EXTENSIONS --standard=PHPCompatibility -p --runtime-set testVersion 7.3- ./"
         ],
         "test:drupal-deprecations": [
             "bin/drupal-check -d web/modules/custom",
