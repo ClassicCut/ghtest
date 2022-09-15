@@ -7,7 +7,6 @@
         "Dropfort"
     ],
     "license": "GPL-2.0-or-later",
-    "version": "9.0.0",
     "homepage": "https://git.dropfort.com/dropfort/drupal-templates/dropfort_drupal_template",
     "minimum-stability": "dev",
     "prefer-stable": true,
