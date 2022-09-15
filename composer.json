@@ -43,7 +43,7 @@
         "webmozart/path-util": "^2.3"
     },
     "require-dev": {
-        "dropfort/dropfort_build": "^4@RC"
+        "dropfort/dropfort_build": "^5@RC"
     },
     "conflict": {
         "drupal/drupal": "*"
