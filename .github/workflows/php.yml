@@ -40,7 +40,7 @@ jobs:
     - name: Check composer version
       run: composer -V
 
-    - name: Install dependencies
+    - name: Composer install
       run: composer install --no-dev --optimize-autoloader
 
     # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
@@ -48,3 +48,14 @@ jobs:
 
     # - name: Run test suite
     #   run: composer run-script test
+
+    - name: Compress build and create release file
+      uses: a7ul/tar-action@v1.1.0
+      id: compress
+      with:
+        command: c
+        cwd: ./ghtest
+        files: |
+          ./*
+        outPath: ghtest.tar.gz
+
