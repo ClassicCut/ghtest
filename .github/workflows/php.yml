@@ -54,7 +54,7 @@ jobs:
       id: compress
       with:
         command: c
-        cwd: ./ghtest
+        cwd: ./
         files: |
           ./*
         outPath: ghtest.tar.gz
