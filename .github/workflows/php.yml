@@ -61,5 +61,5 @@ jobs:
           command: c
           cwd: ./
           files: |
-            ./*
+            *
           outPath: ghtest.tar.gz
