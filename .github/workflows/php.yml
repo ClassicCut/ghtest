@@ -65,3 +65,11 @@ jobs:
         files: |
           ./web
         outPath: ghtest.tar.gz
+
+    - name: Upload release
+      uses: ncipollo/release-action@v1
+      with:
+        artifacts: "ghtest.tar.gz"
+        body: "body"
+        generateReleaseNotes: true
+        token: ${{ github.token }}
