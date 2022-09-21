@@ -23,7 +23,6 @@ jobs:
     - uses: actions/checkout@v3
     - uses: nanasess/setup-php@v3
     - uses: actions/setup-node@v3
-    - uses: a7ul/tar-action@v1.1.0
       with:
         php-version: '7.4'
 
@@ -58,6 +57,7 @@ jobs:
     #   run: composer run-script test
 
     - name: Package release
+      uses: a7ul/tar-action@v1.1.0
       id: compress
       with:
         command: c
