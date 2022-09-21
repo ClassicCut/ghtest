@@ -49,17 +49,12 @@ jobs:
     # - name: Run test suite
     #   run: composer run-script test
 
-  release:
-    needs: build
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Package release
-        uses: a7ul/tar-action@v1.1.0
-        id: compress
-        with:
-          command: c
-          cwd: ./
-          files: |
-            *
-          outPath: ghtest.tar.gz
+    - name: Package release
+      uses: a7ul/tar-action@v1.1.0
+      id: compress
+      with:
+        command: c
+        cwd: ./
+        files: |
+          *
+        outPath: ghtest.tar.gz
