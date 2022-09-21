@@ -72,4 +72,5 @@ jobs:
         artifacts: "ghtest.tar.gz"
         body: "body"
         generateReleaseNotes: true
+        tag: v1test
         token: ${{ github.token }}
