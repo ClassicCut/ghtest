@@ -1,0 +1,73 @@
+{
+    "name": "@dropfort/dropfort_build",
+    "description": "A basic Drupal project to give a starting point for development.",
+    "private": true,
+    "scripts": {
+        "preinstall": "npx npm-force-resolutions || true",
+        "init": "composer install && (npm ci || npm install)",
+        "commit": "npx git-cz",
+        "release": "standard-version",
+        "watch": "npx gulp watch",
+        "browsersync": "npx gulp browserSync",
+        "lint": "npm run lint:scripts && npm run lint:php",
+        "lint:fix": "npm run lint:scripts:fix && npm run lint:php:fix",
+        "lint:scripts": "npx eslint --ext .js .",
+        "lint:scripts:fix": "npm run lint:scripts -- --fix",
+        "lint:php": "phpcs --extensions=php,module,inc,install,test,profile,theme --ignore=**/testing/*,**/test/*,**/node_modules/*,**/vendor/*,**/bin/*,**/docker/*,*.md,web/autoload.php,web/*/contrib/*,web/core/*,web/libraries/*,web/sites/*/files/* --standard=Drupal,DrupalPractice ./",
+        "lint:php:fix": "phpcbf --extensions=php,module,inc,install,test,profile,theme --ignore=**/testing/*,**/test/*,**/node_modules/*,**/vendor/*,**/bin/*,**/docker/*,*.md,web/autoload.php,web/*/contrib/*,web/core/*,web/libraries/*,web/sites/*/files/* --standard=Drupal,DrupalPractice ./",
+        "prepare": "husky install || true",
+        "theme:build": "npm i --prefix web/themes/custom/enforcy && npm run --prefix web/themes/custom/enforcy build:prod",
+        "theme:dev": "npm i --prefix web/themes/custom/enforcy && npm run --prefix web/themes/custom/enforcy build:dev",
+        "theme:watch": "npm i --prefix web/themes/custom/enforcy && npm run --prefix web/themes/custom/enforcy build:watch.",
+        "test:accessibility": "npm run test:accessibility:axe",
+        "test:accessibility:axe": "node testing/axe/runner.js --testhost=$DF_A11Y_TEST_URL",
+        "test:backstop": "npm run test:backstop:ref; npm run test:backstop:test",
+        "test:backstop:ref": "backstop reference --i --configPath=testing/backstop/backstop-settings.js --testhost=$DF_BACKSTOP_TEST_HOST --refhost=$DF_BACKSTOP_REF_HOST --filter=$DF_BACKSTOP_FILTER",
+        "test:backstop:test": "backstop test --configPath=testing/backstop/backstop-settings.js --testhost=$DF_BACKSTOP_TEST_HOST --refhost=$DF_BACKSTOP_REF_HOST --filter=$DF_BACKSTOP_FILTER",
+        "test:lighthouse": "lighthouse-ci $DF_TEST_URL --report=testing/lighthouse/reports $DF_LIGHTHOUSE_OPTIONS",
+        "test:lighthouse:batch": "lighthouse-batch -s $DF_TEST_URL -h --out='testing/lighthouse/reports' -g -p '$DF_LIGHTHOUSE_OPTIONS'"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git@git.dropfort.com:opc/gpen_profile.git"
+    },
+    "keywords": ["drupal"],
+    "author": "Coldfront Labs Inc.",
+    "license": "GPL-2.0-or-later",
+    "dependencies": {
+        "axe-webdriverjs": "^2.2.0",
+        "minimist": "^1.2.5",
+        "mocha": "^9.1.3",
+        "mochawesome": "^7.0.1",
+        "selenium-webdriver": "^4.0.0"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.16.0",
+        "@babel/preset-env": "^7.16.4",
+        "@babel/register": "^7.16.0",
+        "@coldfrontlabs/gulp-templates": "^5.0.0",
+        "@commitlint/cli": "^15.0.0",
+        "@commitlint/config-conventional": "^15.0.0",
+        "axe-core": "^4.3.5",
+        "backstopjs": "^6.0.1",
+        "browser-sync": "^2.27.7",
+        "commitizen": "^4.2.4",
+        "cz-conventional-changelog": "^3.3.0",
+        "dotenv": "^10.0.0",
+        "eslint": "^7.32.0",
+        "eslint-plugin-drupal-contrib": "^1.1.0",
+        "gulp": "^4.0.2",
+        "husky": "^7.0.4",
+        "lighthouse-batch": "^8.1.1",
+        "lighthouse-ci": "^1.13.1",
+        "lint-staged": "^12.0.3",
+        "mocha-multi-reporters": "^1.5.1",
+        "prettier": "^2.4.1",
+        "standard-version": "^9.3.2",
+        "standard-version-updater-yaml": "^1.0.3",
+        "stylelint": "^14.1.0"
+    },
+    "resolutions": {
+        "is-fullwidth-code-point": "3.0.0"
+    }
+}
