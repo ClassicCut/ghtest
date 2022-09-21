@@ -47,8 +47,8 @@ jobs:
     - name: NPM install
       run: npm install
 
-    - name: Theme build
-      run: npm run theme:build
+    #- name: Theme build
+    #  run: npm run theme:build
 
     # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
     # Docs: https://getcomposer.org/doc/articles/scripts.md
