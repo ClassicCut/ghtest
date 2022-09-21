@@ -61,7 +61,7 @@ jobs:
       id: compress
       with:
         command: c
-        cwd: {{ github.workspace }}
+        cwd: ${{ github.workspace }}
         files: |
           ./web
         outPath: ghtest.tar.gz
