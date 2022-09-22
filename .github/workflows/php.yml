@@ -83,7 +83,7 @@ jobs:
           ./vendor
           ./web
           
-        outPath: ghtest.tar.gz
+        outPath: ${{ github.event.repository.name }}-${{ github.ref_name }}.tar.gz
 
     - name: Upload release
       uses: ncipollo/release-action@v1
