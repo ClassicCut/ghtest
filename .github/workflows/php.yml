@@ -58,7 +58,7 @@ jobs:
       with:
         command: c
         cwd: ${{ github.workspace }}
-        files: |
+#        files: |
           #./.babelrc.js
           #./.commitlintrc.js
           #./.czrz
@@ -69,16 +69,17 @@ jobs:
           #./.versionrc.js
           #./bin
           #./config
-          ./composer.json
-          ./composer.lock
           #./drush
           #./gulpfile.babel.js
           #./load.environment.php
+          #./scripts
+          #./templates
+        files: |
+          ./composer.json
+          ./composer.lock
           ./node_modules
           ./package-lock.json
           ./package.json
-          #./scripts
-          #./templates
           ./vendor
           ./web
           
