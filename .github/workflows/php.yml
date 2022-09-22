@@ -73,4 +73,4 @@ jobs:
         body: "body"
         generateReleaseNotes: true
         tag: v1test
-        token: ${{ github.token }}
+        token: ${{ secrets.GITHUB_TOKEN }}
