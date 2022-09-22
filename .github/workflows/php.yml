@@ -2,7 +2,6 @@ name: PHP Composer
 
 on:
   push:
-    branches: [ "7.x-1.x" ]
     tags:
       - /^\d\.x-\d+\.\d+-.+$/
       - /^\d\.x-\d+\.\d+$/
@@ -63,9 +62,29 @@ jobs:
         command: c
         cwd: ${{ github.workspace }}
         files: |
-          ./web
-          ./config
+          #./.babelrc.js
+          #./.commitlintrc.js
+          #./.czrz
+          #./.eslintrc.js
+          #./.husky
+          #./.lintstagedrc.js
+          #./.prettierrc.js
+          #./.versionrc.js
+          #./bin
+          #./config
+          ./composer.json
+          ./composer.lock
+          #./drush
+          #./gulpfile.babel.js
+          #./load.environment.php
+          ./node_modules
+          ./package-lock.json
+          ./package.json
+          #./scripts
+          #./templates
           ./vendor
+          ./web
+          
         outPath: ghtest.tar.gz
 
     - name: Upload release
