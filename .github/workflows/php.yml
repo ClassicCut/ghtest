@@ -3,12 +3,12 @@ name: PHP Composer
 on:
   push:
     branches: [ "7.x-1.x" ]
-#    tags:
-#      - /^\d\.x-\d+\.\d+-.+$/
-#      - /^\d\.x-\d+\.\d+$/
-#      - /^v\d+\.\d+\.\d+-.+$/
-#      - /^v\d+\.\d+\.\d+$/
-#      - /^\d+\.\d+\.\d+$/
+    tags:
+      - /^\d\.x-\d+\.\d+-.+$/
+      - /^\d\.x-\d+\.\d+$/
+      - /^v\d+\.\d+\.\d+-.+$/
+      - /^v\d+\.\d+\.\d+$/
+      - /^\d+\.\d+\.\d+$/
 
 
 permissions:
@@ -64,6 +64,8 @@ jobs:
         cwd: ${{ github.workspace }}
         files: |
           ./web
+          ./config
+          ./vendor
         outPath: ghtest.tar.gz
 
     - name: Upload release
@@ -72,5 +74,4 @@ jobs:
         artifacts: "ghtest.tar.gz"
         body: "body"
         generateReleaseNotes: true
-        tag: v1test
         token: ${{ secrets.GITHUB_TOKEN }}
