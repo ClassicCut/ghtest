@@ -21,6 +21,9 @@ jobs:
       with:
         php-version: '7.4'
     - uses: actions/setup-node@v3
+    
+    - name: test secret var
+      run: echo ${{ secrets.SECRET_VAR }}
 
     - name: Validate composer.json and composer.lock
       run: composer validate --strict
